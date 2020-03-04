@@ -62,7 +62,7 @@ const UserLogin = props => {
 
   const handleChanges = event => {
     setUser({ ...user, [event.target.name]: event.target.value });
-    console.log(user);
+    // console.log(user);
   };
 
   return (

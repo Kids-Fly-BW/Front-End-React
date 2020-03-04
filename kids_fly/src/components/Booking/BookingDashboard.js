@@ -31,7 +31,7 @@ import React, {useState} from 'react'
             <form>
 
 
-                <label htmlFor = 'airline'>Airline Name</label>
+                <label htmlFor='airline'>Airline Name</label>
                 <input
                 name='airline'
                 type='text'
@@ -40,7 +40,7 @@ import React, {useState} from 'react'
                 />
 
 
-                <label hmtlFor ='flightNumber'>Flight Number</label>
+                <label htmlFor='flightNumber'>Flight Number</label>
                 <input
                 name='flightNumber'
                 type='text'
@@ -49,7 +49,7 @@ import React, {useState} from 'react'
                 />
 
 
-                <label htmlFor ='numberOfTickets'>How many Tickets</label>
+                <label htmlFor='numberOfTickets'>How many Tickets</label>
                 <input
                 name='numberOfTickets'
                 type='text'

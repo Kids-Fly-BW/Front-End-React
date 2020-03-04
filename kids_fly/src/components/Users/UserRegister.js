@@ -54,7 +54,7 @@ const UserRegister = props => {
     axios.post('https://kidfly.herokuapp.com/api/auth/register', user)
     .then(response => {
       console.log('New User sucessfully created!', response)
-      props.history.push('/')
+      props.history.push('/booking')
     })
     .catch(error => {
       console.log(`Unable to create new user. ${user}`, error)
