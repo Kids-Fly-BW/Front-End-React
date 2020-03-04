@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem
+} from "reactstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navigation = (props) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -10,22 +17,24 @@ const Navigation = (props) => {
 
   return (
     <div>
-      <Navbar color="faded" light>
-        <NavbarBrand href="/" className="mr-auto">Silent Auction</NavbarBrand>
+      <Navbar color="light" light>
+        <NavbarBrand href="/" className="mr-auto">
+          Silent Auction
+        </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <Link to="/UserRegister">Sign Up</Link>
+              <Link to="/signup">Sign-up</Link>
             </NavItem>
             <NavItem>
-              <Link to="/UserLogin">Log In</Link>
+              <Link to="/login">Log-in</Link>
             </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
     </div>
   );
-}
+};
 
 export default Navigation;

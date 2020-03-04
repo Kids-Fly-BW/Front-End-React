@@ -1,248 +1,239 @@
-import React, {useState, useEffect} from 'react'
-import {withFormik, Form, Field} from 'formik';
-// import './UserRegister.css';
-import * as Yup from "yup";
-import axios from "axios";
+import React from "react";
+import { Button, MenuItem } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  ValidatorForm,
+  TextValidator,
+  SelectValidator
+} from "react-material-ui-form-validator";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 
+// Material UI Styles Here //
+const FormWrapper = styled(ValidatorForm)`
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  h2 {
+    text-align: center;
+  }
+`;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
-const Div = styled.div`
-display: flex;
-flex-direction: column;
-border: solid 5px #61dafb;
-padding: 3rem 8rem;
-  `;
+const useStyles = makeStyles(theme => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: 200
+    }
+  }
+}));
 
+// Form Component //
+const UserRegister = props => {
+  const classes = useStyles();
 
+  const [user, setUser] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    streetAddress: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    username: "",
+    password: "",
+  });
 
-const UserRegister = ({ errors, touched, values, status }) => {
-  const [users, setUsers] = useState([]);
+  const handleSubmit = event => {
+    event.preventDefault();
+    //validation
+  
+  };
 
-  useEffect(() => {
-    status && setUsers(users => [...users, status]);
-  }, [status]);
-
+  const handleChanges = event => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+    console.log(user);
+  };
 
   return (
-
-       
-
-    <Div className="user-form">
-      <h1>Sign Up</h1>
-      <Form>
-        <Field 
-        //USER INFO
-          id="firstName"
-          type="text"
-          name="firstName"
-          placeholder="First Name" 
-        />
-        {touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
-        
-
-        <Field 
-          id="lastName"
-          type="text"
-          name="lastName"
-          placeholder="Last Name" 
-        />
-        {touched.lastName && errors.lastName && <p>{errors.lastName}</p>}
-        
-        <Field 
-          id="username"
-          type="text"
-          name="username"
-          placeholder="Username" 
-        />
-        {touched.username && errors.username&& <p>{errors.username}</p>}
-
-        <Field 
-          id="email"
-          type="text"
-          name="email"
-          placeholder="Email" 
-        />
-        {touched.email && errors.email && <p>{errors.email}</p>}
-
-        <Field 
-          id="password"
-          type="password"
-          name="password" 
-          placeholder="Password:" 
+    <FormWrapper
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <div>
+        <h2>Sign Up Form</h2>
+        <div>
+          <TextValidator
+            label="First Name"
+            name="firstName"
+            value={user.firstName}
+            onChange={handleChanges}
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+            variant="outlined"
           />
-          {touched.password && errors.password && <p>{errors.password}</p>}
-
-          <Field as="select" className="role-select" name="role">
-          <option disabled value>Choose a Role</option>
-          <option value="Bidder">Bidder</option>
-          <option value="Seller">Seller</option>
-        </Field>
-
-        </Form>
-
-        <Form>
-          <Field
-          //ADDRESS INFO 
-                id=""
-                name="streetAddress"
-                variant="outlined"
-                label="Street Address"
-                type="text"
-                placeholder="Street Address"
-              />
-            {touched.streetAddress && errors.streetAddress&& <p>{errors.streetAddress}</p>}
-
-            <Field
-                id=""
-                name="city"
-                variant="outlined"
-                label="city"
-                type="text"
-                placeholder="City"
-              />
-            {touched.city && errors.city && <p>{errors.city}</p>}
-
-
-            <Field as="select" className="state-select" name="state">
-                <option disabled>Choose A State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-            </Field>
-        
-             <Field
-                id=""
-                name="zipCode"
-                variant="outlined"
-                label="zipCode"
-                type="text"
-                placeholder="Zip Code"
-              />
-            {touched.zipCode && errors.zipCode && <p>{errors.zipCode}</p>}
-
-        <button type="submit">Submit</button>
-
-      </Form>
-
-      {users.map(users => (
-        <ul>
-          <li>First-Name: {users.firstName}</li>
-          <li>Last-Name: {users.lastName}</li>
-          <li>Username: {users.username}</li>
-          <li>Email: {users.email}</li>
-          <li>Password: {users.password}</li>
-          <li>Role: {users.role}</li>
-          <li>Street Address: {users.streetAddress}</li>
-          <li>City: {users.city}</li>
-          <li>State: {users.state}</li>
-          <li>Zip-Code: {users.zipCode}</li>
-        </ul>
-      ))}
-    </Div>
+        </div>
+        <div>
+          <TextValidator
+            label="Last Name"
+            name="lastName"
+            value={user.lastName}
+            onChange={handleChanges}
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+            variant="outlined"
+          />
+        </div>
+        <div>
+          <TextValidator
+            label="Email"
+            name="email"
+            value={user.email}
+            onChange={handleChanges}
+            variant="outlined"
+            validators={["required", "isEmail"]}
+            errorMessages={["this field is required"]}
+            type="email"
+          />
+        </div>
+        <div>
+          <TextValidator
+            label="Street Address"
+            name="streetAddress"
+            value={user.streetAddress}
+            onChange={handleChanges}
+            variant="outlined"
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+          />
+        </div>
+        <div>
+          <TextValidator
+            label="City"
+            name="city"
+            value={user.city}
+            onChange={handleChanges}
+            variant="outlined"
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+          />
+        </div>
+        <div>
+          <SelectValidator
+            value={user.state}
+            onChange={handleChanges}
+            name="state"
+            label="State"
+            variant="outlined"
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+          >
+            <MenuItem value="AL">Alabama</MenuItem>
+            <MenuItem value="AK">Alaska</MenuItem>
+            <MenuItem value="AZ">Arizona</MenuItem>
+            <MenuItem value="AR">Arkansas</MenuItem>
+            <MenuItem value="CA">California</MenuItem>
+            <MenuItem value="CO">Colorado</MenuItem>
+            <MenuItem value="CT">Connecticut</MenuItem>
+            <MenuItem value="DE">Delaware</MenuItem>
+            <MenuItem value="FL">Florida</MenuItem>
+            <MenuItem value="GA">Georgia</MenuItem>
+            <MenuItem value="HI">Hawaii</MenuItem>
+            <MenuItem value="ID">Idaho</MenuItem>
+            <MenuItem value="IL">Illinois</MenuItem>
+            <MenuItem value="IN">Indiana</MenuItem>
+            <MenuItem value="IA">Iowa</MenuItem>
+            <MenuItem value="KS">Kansas</MenuItem>
+            <MenuItem value="KY">Kentucky</MenuItem>
+            <MenuItem value="LA">Louisiana</MenuItem>
+            <MenuItem value="ME">Maine</MenuItem>
+            <MenuItem value="MD">Maryland</MenuItem>
+            <MenuItem value="MA">Massachusetts</MenuItem>
+            <MenuItem value="MI">Michigan</MenuItem>
+            <MenuItem value="MN">Minnesota</MenuItem>
+            <MenuItem value="MS">Mississippi</MenuItem>
+            <MenuItem value="MO">Missouri</MenuItem>
+            <MenuItem value="MT">Montana</MenuItem>
+            <MenuItem value="NE">Nebraska</MenuItem>
+            <MenuItem value="NV">Nevada</MenuItem>
+            <MenuItem value="NH">New Hampshire</MenuItem>
+            <MenuItem value="NJ">New Jersey</MenuItem>
+            <MenuItem value="NM">New Mexico</MenuItem>
+            <MenuItem value="NY">New York</MenuItem>
+            <MenuItem value="NC">North Carolina</MenuItem>
+            <MenuItem value="ND">North Dakota</MenuItem>
+            <MenuItem value="OH">Ohio</MenuItem>
+            <MenuItem value="OK">Oklahoma</MenuItem>
+            <MenuItem value="OR">Oregon</MenuItem>
+            <MenuItem value="PA">Pennsylvania</MenuItem>
+            <MenuItem value="RI">Rhode Island</MenuItem>
+            <MenuItem value="SC">South Carolina</MenuItem>
+            <MenuItem value="SD">South Dakota</MenuItem>
+            <MenuItem value="TN">Tennessee</MenuItem>
+            <MenuItem value="TX">Texas</MenuItem>
+            <MenuItem value="UT">Utah</MenuItem>
+            <MenuItem value="VT">Vermont</MenuItem>
+            <MenuItem value="VA">Virginia</MenuItem>
+            <MenuItem value="WA">Washington</MenuItem>
+            <MenuItem value="WV">West Virginia</MenuItem>
+            <MenuItem value="WI">Wisconsin</MenuItem>
+            <MenuItem value="WY">Wyoming</MenuItem>
+          </SelectValidator>
+        </div>
+        <div>
+          <TextValidator
+            label="Zip Code"
+            name="zipCode"
+            value={user.zipCode}
+            onChange={handleChanges}
+            variant="outlined"
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+          />
+        </div>
+        <div>
+          <TextValidator
+            label="Username"
+            name="username"
+            value={user.username}
+            onChange={handleChanges}
+            variant="outlined"
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+          />
+        </div>
+        <div>
+          <TextValidator
+            label="Password"
+            name="password"
+            value={user.password}
+            onChange={handleChanges}
+            variant="outlined"
+            validators={[
+              "required",
+              "matchRegexp:^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+            ]}
+            errorMessages={[
+              "At least one upper case letter, one lower case letter, one digit, one special character, and a minimum length of 8."
+            ]}
+            // type="password"
+          />
+        </div>
+        <div>
+          <ButtonWrapper>
+            <Button variant="outlined" color="primary" type="submit">
+              Sign Up!
+            </Button>
+          </ButtonWrapper>
+        </div>
+      </div>
+    </FormWrapper>
   );
 };
 
-
-const FormikForms = withFormik({
-  mapPropsToValues({firstName, lastName, username,  email, password, role, streetAddress, city, state, zipCode}) {
-    return {
-    firstName: firstName || "",
-    lastName:lastName || "",
-    username:username || "",
-    email: email || "",
-    password: password || "",
-    role: role || "",
-    streetAddress: streetAddress || "",
-    city: city || "",
-    state: state ||"",
-    zipCode: zipCode ||"",
-    
-    //   service: service || false
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-      //User Info Alert
-    firstName: Yup.string().min(1).required(" Name Required!"),
-    lastName: Yup.string().min(1).required(" Name Required!"),
-    email: Yup.string().email().required(" Email Required!"),
-    password: Yup.string().matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-      ).required("Password Required!"),
-    role: Yup.string().required(" Fill In Role!"),
-
-
-    //Address Alert
-    streetAddress: Yup.string().required("Address Required!"),
-    city: Yup.string().required("City Required!"),
-    state: Yup.string().required("State Required!"),
-    zipCode: Yup.string().min(5).max(5).required("Zip Code Required!"),
-    // servie: Yup.bool()
-  }),
-
-  handleSubmit(values, {setStatus, resetForm}) {
-
-
-
-  axios
-    .post(" https://reqres.in/api/users", values)
-      .then(response => {
-        setStatus(response.data);
-        resetForm();
-      })
-      .catch(err => {
-        console.log("Error:", err.response);
-      });
-  }
-})(UserRegister);
-
-export default FormikForms;  
+export default (UserRegister);
