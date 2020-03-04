@@ -8,7 +8,7 @@ import {
   Nav,
   NavItem
 } from "reactstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navigation = (props) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -19,7 +19,7 @@ const Navigation = (props) => {
     <div>
       <Navbar color="light" light>
         <NavbarBrand href="/" className="mr-auto">
-          Silent Auction
+          Kids Fly!
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
