@@ -7,6 +7,7 @@ import {
 } from "react-material-ui-form-validator";
 // import { SignUp } from "../../actions/index";
 import styled from "styled-components";
+import axios from 'axios'
 
 // Material UI Styles Here //
 const FormWrapper = styled(ValidatorForm)`
@@ -43,6 +44,20 @@ const UserLogin = props => {
   const handleSubmit = event => {
     event.preventDefault();
     //validation
+    axios
+      .post(
+        "https://kidfly.herokuapp.com/api/auth/login",
+        user
+      )
+      .then(response => {
+        console.log("Successful Login", response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("ID", response.data.userID);
+        props.history.push("/booking");
+      })
+      .catch(error => {
+        console.log('Unable to login. ', error);
+      });
   };
 
   const handleChanges = event => {

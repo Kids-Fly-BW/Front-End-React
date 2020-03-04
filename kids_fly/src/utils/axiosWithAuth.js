@@ -4,7 +4,7 @@ export const axiosWithAuth = () => {
     return axios.create({
 
     // add 'endpoint' for token to baseURL
-    baseURL: '',
+    baseURL: 'https://kidfly.herokuapp.com/api',
     headers: {
         Authorization: localStorage.getItem('token')
     }

@@ -7,6 +7,7 @@ import {
   SelectValidator
 } from "react-material-ui-form-validator";
 import styled from "styled-components";
+import axios from 'axios'
 
 // Material UI Styles Here //
 const FormWrapper = styled(ValidatorForm)`
@@ -50,12 +51,20 @@ const UserRegister = props => {
   const handleSubmit = event => {
     event.preventDefault();
     //validation
+    axios.post('https://kidfly.herokuapp.com/api/auth/register', user)
+    .then(response => {
+      console.log('New User sucessfully created!', response)
+      props.history.push('/')
+    })
+    .catch(error => {
+      console.log(`Unable to create new user. ${user}`, error)
+    })
   
   };
 
   const handleChanges = event => {
     setUser({ ...user, [event.target.name]: event.target.value });
-    console.log(user);
+    // console.log(user);
   };
 
   return (
