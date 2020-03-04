@@ -23,12 +23,15 @@ const Navigation = (props) => {
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
+          <Nav navbar >
             <NavItem>
               <Link to="/signup">Sign-up</Link>
             </NavItem>
             <NavItem>
               <Link to="/login">Log-in</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/booking">Bookings</Link>
             </NavItem>
           </Nav>
         </Collapse>
