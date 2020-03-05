@@ -48,7 +48,7 @@ const UserRegister = props => {
     axios.post('https://kidfly.herokuapp.com/api/auth/register', user)
     .then(response => {
       console.log('New User sucessfully created!', response)
-      props.history.push('/')
+      props.history.push('/Login')
     })
     .catch(error => {
       console.log(`Unable to create new user. ${user}`, error)
@@ -60,7 +60,7 @@ const UserRegister = props => {
     setUser({ ...user, [event.target.name]: event.target.value });
     // console.log(user);
   };
-
+console.log('test', user)
   return (
     <FormWrapper
       className={classes.root}
@@ -99,6 +99,7 @@ const UserRegister = props => {
             name="password"
             value={user.password}
             onChange={handleChanges}
+            type ='password'
             variant="outlined"
             validators={[
               "required",

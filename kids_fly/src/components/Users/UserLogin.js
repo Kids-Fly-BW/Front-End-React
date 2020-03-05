@@ -53,7 +53,7 @@ const UserLogin = props => {
         console.log("Successful Login", response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("ID", response.data.userID);
-        props.history.push("/booking");
+        props.history.push("./booking");
       })
       .catch(error => {
         console.log('Unable to login. ', error);
