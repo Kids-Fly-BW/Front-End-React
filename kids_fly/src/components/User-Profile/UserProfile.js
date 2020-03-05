@@ -7,7 +7,7 @@ const [user, setUser]= useState()
 
 useEffect(()=>{
     axios
-    .get()
+    .get('http://localhost:5000/')
     .then(res =>{
         setUser(res.data)
     })
