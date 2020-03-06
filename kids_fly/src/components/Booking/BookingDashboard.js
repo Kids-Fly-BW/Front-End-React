@@ -1,62 +1,90 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {connect} from 'react-redux'
+import {getData, postData, putData, deleteData} from '../../actions'
 
- const BookingDashboard = () => {
-
+ const BookingDashboard = (props) => {
+console.log(props)
     const [bookingInfo, setBookingInfo] = useState({
         airline: '',
-        flightNumber: '',
-        numberOfTickets: ''
+        flight_number: '',
+        airport_name: ''
     })
 
+    
+    const [list, setList] = useState({})
+    useEffect(()=>{
+        setList(props.getData())
+        console.log('booking', list.data)
+    }, [])
+
+
     const handleChange = (e) =>{
-       setBookingInfo({
-           ...bookingInfo,
-           [e.target.name]: e.target.value
-       })
+        setBookingInfo({
+            ...bookingInfo,
+            [e.target.name]: e.target.value
+        })
+     }
+
+   const handleSubmit = (e) =>{
+    e.preventDefault()
+    props.postData({...bookingInfo, user_id: localStorage.getItem('ID')})
+    setBookingInfo({
+        airline: '',
+        flight_number: '',
+        airport_name: ''
+    })
     }
 
+   
 
-
-//    const handleSubmit = (e) =>{
-//     e.preventDefault
-//     }
-
-
+    
     return (
         <div>
-            {/* this is the data from the server with other currect Bookings */}
+            {props.booking.map(e =>(
+                <div key={e.id}>
+                    <p>{e.airport_name}</p>
+                    <p>{e.airline}</p>
+                </div>
+            ))}
+            
             <div>
             <p>Bookings to come</p>
+
+
             {/* Booking Form */}
-            <form>
+            <form onSubmit={handleSubmit}>
 
 
-                <label htmlFor = 'airline'>Airline Name</label>
+                <label>Airline Name</label>
                 <input
                 name='airline'
                 type='text'
                 value={bookingInfo.airline}
                 onChange={handleChange}
+                placeholder='Airline'
                 />
 
 
-                <label hmtlFor ='flightNumber'>Flight Number</label>
+                <label>Flight Number</label>
                 <input
-                name='flightNumber'
+                name='flight_number'
                 type='text'
-                value={bookingInfo.flightNumber}
+                value={bookingInfo.flight_number}
                 onChange={handleChange}
+                placeholder= 'flight#'
                 />
 
 
-                <label htmlFor ='numberOfTickets'>How many Tickets</label>
+                <label>Airport Name</label>
                 <input
-                name='numberOfTickets'
+                name='airport_name'
                 type='text'
-                value={bookingInfo.numberOfTickets}
+                value={bookingInfo.airport_name}
                 onChange={handleChange}
+                placeholder = 'Airport Name'
                 />
 
+                <button className='booking-button' type='submit'>Check In</button>
 
             </form>
             </div>
@@ -64,4 +92,17 @@ import React, {useState} from 'react'
     )
 }
 
-export default BookingDashboard
+    const mapStateToProps = state =>{
+        return{
+            booking: state.booking,
+            isFetching:false,
+            isUpdating:false,
+            error: state.error
+        }
+    }
+
+
+
+export default connect (
+    mapStateToProps, {getData, postData, putData, deleteData}
+) (BookingDashboard)

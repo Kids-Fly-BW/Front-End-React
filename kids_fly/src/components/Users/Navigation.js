@@ -19,7 +19,7 @@ const Navigation = (props) => {
     <div>
       <Navbar color="light" light>
         <NavbarBrand href="/" className="mr-auto">
-          Kids Fly!
+          {/* <img src='../images/logo.jpg' alt='plane'></img> */}
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
@@ -28,7 +28,7 @@ const Navigation = (props) => {
               <Link to="/signup">Sign-up</Link>
             </NavItem>
             <NavItem>
-              <Link to="/login">Log-in</Link>
+              <Link to="/Login">Log-in</Link>
             </NavItem>
             <NavItem>
               <Link to="/booking">Bookings</Link>

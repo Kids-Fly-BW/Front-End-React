@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const axiosWithAuth = () => {
+const axiosWithAuth = () => {
     return axios.create({
 
     // add 'endpoint' for token to baseURL
@@ -10,3 +10,6 @@ export const axiosWithAuth = () => {
     }
 });
 };
+
+
+export default axiosWithAuth

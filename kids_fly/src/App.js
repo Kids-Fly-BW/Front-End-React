@@ -3,11 +3,16 @@ import { Route } from "react-router-dom";
 import "./App.css";
 import BookingDashboard from "./components/Booking/BookingDashboard";
 
+import PrivateRoute from './utils/PrivateRoute'
+
 import Navigation from "./components/Users/Navigation";
 import UserRegister from "./components/Users/UserRegister";
 import UserLogin from "./components/Users/UserLogin";
 
 function App() {
+
+
+
   return (
     <div className="App">
       <Route path='/'>

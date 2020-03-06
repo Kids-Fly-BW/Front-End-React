@@ -8,6 +8,9 @@ import {
 } from "react-material-ui-form-validator";
 import styled from "styled-components";
 import axios from 'axios'
+import {useHistory} from 'react-router-dom'
+
+
 
 // Material UI Styles Here //
 const FormWrapper = styled(ValidatorForm)`
@@ -36,6 +39,9 @@ const useStyles = makeStyles(theme => ({
 const UserRegister = props => {
   const classes = useStyles();
 
+  const history = useHistory()
+
+
   const [user, setUser] = React.useState({
     email: "",
     username: "",
@@ -48,7 +54,7 @@ const UserRegister = props => {
     axios.post('https://kidfly.herokuapp.com/api/auth/register', user)
     .then(response => {
       console.log('New User sucessfully created!', response)
-      props.history.push('/Login')
+      history.push('/login')
     })
     .catch(error => {
       console.log(`Unable to create new user. ${user}`, error)

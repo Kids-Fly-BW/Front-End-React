@@ -8,6 +8,7 @@ import {
 // import { SignUp } from "../../actions/index";
 import styled from "styled-components";
 import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 // Material UI Styles Here //
 const FormWrapper = styled(ValidatorForm)`
@@ -36,6 +37,8 @@ const useStyles = makeStyles(theme => ({
 const UserLogin = props => {
   const classes = useStyles();
 
+  const history = useHistory()
+
   const [user, setUser] = React.useState({
     username: "",
     password: ""
@@ -52,8 +55,8 @@ const UserLogin = props => {
       .then(response => {
         console.log("Successful Login", response);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("ID", response.data.userID);
-        props.history.push("./booking");
+        localStorage.setItem("ID", response.data.id);
+        history.push('/booking');
       })
       .catch(error => {
         console.log('Unable to login. ', error);
