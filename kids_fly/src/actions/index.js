@@ -62,14 +62,14 @@ export const postData = (update) => dispatch=>{
 
 
 
-export const putData = () => dispatch =>{
+export const putData = (user) => dispatch =>{
     dispatch({type: CHANGE_DATA})
     axiosWithAuth()
-    .put('/api/data')
+    .put(`/booking/${user.id}}`)
     .then(res =>{
         dispatch({type: FETCH_DATA, payload: res.data})
         axiosWithAuth()
-        .get('/api/data')
+        .get('/booking')
         .then(res =>{
             dispatch({type: UPDATE_DATA, payload: res.data})
         })
@@ -85,12 +85,12 @@ export const putData = () => dispatch =>{
 
 export const deleteData = () => dispatch =>{
     dispatch({type: DELETE_DATA})
-    axiosWithAuth()
-    .delete('/api/data')
+     axiosWithAuth() 
+    .delete(`/booking/id`)
     .then(res =>{
         dispatch({type: FETCH_DATA, payload: res.data})
         axiosWithAuth()
-        .get('/api/data')
+        .get('/booking')
         .then(res =>{
             dispatch({type: UPDATE_DATA, payload: res.data})
         })

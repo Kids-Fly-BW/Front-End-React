@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getData, postData, putData, deleteData} from '../../actions'
+import BookingCard from './BookingCard'
+
+
+
+
 
  const BookingDashboard = (props) => {
 console.log(props)
@@ -12,10 +17,16 @@ console.log(props)
 
     
     const [list, setList] = useState({})
+
+
+
+
     useEffect(()=>{
         setList(props.getData())
-        console.log('booking', list.data)
+        
     }, [])
+
+
 
 
     const handleChange = (e) =>{
@@ -35,20 +46,35 @@ console.log(props)
     })
     }
 
-   
+    useEffect(()=>{
+        handleDelete()
+    }, [])
 
-    
+
+    const handleDelete = (e) =>{
+        props.deleteData()
+    }
+   
+    const handleUpdate = (e) =>{
+        e.preventDefault()
+        props.putData()
+    }
+
     return (
         <div>
-            {props.booking.map(e =>(
-                <div key={e.id}>
-                    <p>{e.airport_name}</p>
-                    <p>{e.airline}</p>
-                </div>
+            <div className='each-card'>
+            {props.booking[0] && props.booking[0].map(e =>(
+               <BookingCard
+               key={e.id}
+               id={e.id}
+               airport_name={e.airport_name}
+               airline={e.airline}
+               flight_number={e.flight_number}
+               handleDelete={handleDelete}
+               />
             ))}
-            
+            </div>
             <div>
-            <p>Bookings to come</p>
 
 
             {/* Booking Form */}

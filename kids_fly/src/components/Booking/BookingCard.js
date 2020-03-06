@@ -1,3 +1,37 @@
-//booking card will be mapped to data props from booking dashboard,
-//will also have edit and delete modals as components
-//bring in booking edit as a component
+import React from 'react'
+import { connect } from 'react-redux'
+import {deleteData} from '../../actions'
+import BookingEdit from './BookingEdit'
+
+
+function BookingCard(props){
+
+
+    // const handleDelete= (e)=>{
+    //     e.preventDefault()
+    //     props.deleteData()
+    // }
+    console.log('cardprops', props)
+    return(
+        <div className='cards'>
+            <p>Airline:{props.airline} </p>
+            <p>Airport: {props.airport}</p>
+            <p>Flight# {props.flight_number}</p>
+            <button onClick={props.deleteData()}>Delete</button>
+            <BookingEdit bookinginfo={props}/>
+        </div>
+    )
+}
+
+const mapStateToProps = state =>{
+    return{
+        isFetching:false,
+        isUpdating:false,
+        error: state.error
+    }
+
+}
+
+export default connect(
+    mapStateToProps, {deleteData}
+) (BookingCard)

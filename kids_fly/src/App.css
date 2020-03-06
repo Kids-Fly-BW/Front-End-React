@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+ 
 }
 
 .App-logo {
@@ -50,4 +51,15 @@ input{
   height:8vh;
   text-align:center;
 
+}
+
+.cards{
+  margin:1% 1%;
+  border:1px solid black;
+  width:30%;
+}
+
+.each-card{
+display:flex;
+justify-content: center;
 }
