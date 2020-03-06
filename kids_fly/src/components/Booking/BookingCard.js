@@ -15,9 +15,9 @@ function BookingCard(props){
     return(
         <div className='cards'>
             <p>Airline:{props.airline} </p>
-            <p>Airport: {props.airport}</p>
+            <p>Airport: {props.airport_name}</p>
             <p>Flight# {props.flight_number}</p>
-            <button onClick={props.deleteData()}>Delete</button>
+            <button onClick={()=>props.deleteData(props.id)}>Delete</button>
             <BookingEdit bookinginfo={props}/>
         </div>
     )

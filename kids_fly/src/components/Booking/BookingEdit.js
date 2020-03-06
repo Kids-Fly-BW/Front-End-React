@@ -4,37 +4,30 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import {putData} from '../../actions'
 
 function BookingEdit(props){
 
-    
-const [edit, setEdit]= useState(false)
 const [bookingEdit, setBookingEdit]= useState({
-    airline: props.airline,
-    flight_number: props.flight_number,
-    airport_name: props.airport_name
+    airline: props.bookinginfo.airline,
+    flight_number: props.bookinginfo.flight_number,
+    airport_name: props.bookinginfo.airport_name
 })
 
-console.log('bookingEdit', edit)
-
+console.log('bookingEdit', bookingEdit)
+console.log('bookingProps', props)
   
     const [modal, setModal] = useState(false);
   
     const toggle = () => setModal(!modal);
 
+    const user_id = localStorage.getItem('ID')
 
 
 
-
-const startEdit =(jobs) => {
-  setBookingEdit({
-    id:props.booking.id, 
-    airline: props.booking.airline,
-    flight_number: props.booking.flight_number,
-    airport_name: props.booking.airport_name
-})
-    setEdit(true)
+const startEdit =() => {
+    console.log('here')
+    props.putData(user_id, bookingEdit)
 }
 
 
@@ -51,7 +44,7 @@ const handleChange = (e) =>{
     }
     return(
         <div>
-            <Button color="danger" onClick={toggle}>Toggle Me</Button>
+            <Button color="danger" onClick={toggle}>Change</Button>
       <Modal isOpen={modal} toggle={toggle} className='Modals'>
         <ModalHeader toggle={toggle}>Modal title</ModalHeader>
         <ModalBody>
@@ -88,8 +81,7 @@ const handleChange = (e) =>{
             </form>
         </ModalBody>
         <ModalFooter>
-        <Button  onClick={() => startEdit(edit)}>edit</Button>
-          <Button key={edit.id} color="primary" onClick={toggle}>Edit</Button>{' '}
+          <Button key={props.id} color="primary" onClick={() => startEdit()}>Edit</Button>{' '}
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
@@ -110,5 +102,5 @@ const mapStateToProps = state =>{
 }
 
 export default connect(
-mapStateToProps, {}
+mapStateToProps, {putData}
 )(BookingEdit)

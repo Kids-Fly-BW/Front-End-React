@@ -46,14 +46,14 @@ console.log(props)
     })
     }
 
-    useEffect(()=>{
-        handleDelete()
-    }, [])
+    // useEffect(()=>{
+    //     handleDelete()
+    // }, [])
 
 
-    const handleDelete = (e) =>{
-        props.deleteData()
-    }
+    // const handleDelete = (e) =>{
+    //     props.deleteData()
+    // }
    
     const handleUpdate = (e) =>{
         e.preventDefault()
@@ -70,7 +70,6 @@ console.log(props)
                airport_name={e.airport_name}
                airline={e.airline}
                flight_number={e.flight_number}
-               handleDelete={handleDelete}
                />
             ))}
             </div>
